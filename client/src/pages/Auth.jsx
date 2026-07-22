@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { RiRobot3Fill } from "react-icons/ri";
 import { GiCometSpark } from "react-icons/gi";
 import { FcGoogle } from "react-icons/fc";
@@ -22,12 +22,19 @@ const Auth = ({isModel = false}) => {
       let User = response.user;
       let name = User.displayName;
       let email = User.email;
+      
       const result = await axios.post(ServerUrl + "/api/auth/google", { name, email }, { withCredentials: true });
-      // console.log(result.data);
-      dispatch(setUserData(result.data)) 
+      
+      // Debug log to check what your backend is actually sending
+      console.log("Backend response:", result.data);
+
+      // Safe fallback: Handles whether backend sends { user: {...} } or just {...}
+      const userDataPayload = result.data.user || result.data;
+
+      dispatch(setUserData(userDataPayload)); 
     } catch (error) {
       console.log(error);
-      dispatch(setUserData(null))
+      dispatch(setUserData(null));
     } finally {
       setLoading(false);
     }

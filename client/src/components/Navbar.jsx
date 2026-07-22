@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import {motion} from "motion/react"
@@ -81,12 +81,12 @@ const Navbar = () => {
                    {userData?.name?.slice(0, 1)?.toUpperCase() || <FaUserAstronaut size={16} />}
                 </button>
                 {showUserPopup && (
-                    <div className='absolute right-0 mt-3 w-48 bg-white shadow-x1 border border-gray-200 rounded-x1 p-4 z-50'>
+                    <div className='absolute right-0 mt-3 w-48 bg-white shadow-xl border border-gray-200 rounded-xl p-4 z-50'>
                        <p className='text-md text-blue-500 font-medium mb-1'>{userData?.name}</p>
 
                        <button
                          
-                         className='w-full text-left texr-sm py-2 hover:text-black text-gray-600'>
+                         className='w-full text-left text-sm py-2 hover:text-black text-gray-600'>
                           Interview History
                        </button>
                        <button 
