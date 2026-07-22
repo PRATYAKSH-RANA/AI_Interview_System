@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Dark Background -->
+  <rect width="32" height="32" rx="8" fill="#111827" />
+  <!-- The 'V' -->
+  <path d="M8 7L13 21L18 7" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- The 'H' (Connecting to V) -->
+  <path d="M18 7V21M24 7V21M18 14H24" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Data Node Dot -->
+  <circle cx="18" cy="14" r="2.5" fill="#38BDF8"/>
+</svg>
