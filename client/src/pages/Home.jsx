@@ -41,8 +41,7 @@ import { useNavigate } from 'react-router-dom'
   }
 */
 
-// Small animated "listening" waveform — the page's signature element.
-// Ties directly to the voice-assistant feature rather than being pure decoration.
+
 const Waveform = () => {
   const bars = [10, 18, 26, 16, 22, 12, 20, 14, 24, 10]
   return (
