@@ -10,6 +10,7 @@ import { ServerUrl } from '../App';
 import { setUserData } from '../redux/userSlice';
 import AuthModel from './AuthModel'
 
+
 const Navbar = () => {
     const {userData}=useSelector((state)=>state.user)
     const[showCreditPopup,setShowCreditPopup]=useState(false)
@@ -31,17 +32,17 @@ const Navbar = () => {
          }
     }
   return (
-    <div
+    <motion.div
      initial={{opacity:0,y:-40}}
      animate={{opacity:1,y:0}}
      transition={{duration:0.3}}
-     className='bg-[#f3f3f3] flex justify-center px-4 pt-6'>
-      <motion.div className='w-full max-w-6xl bg-white rounded-[24px] shadow-sm border border-gray-200 px-8 py-4 flex justify-between items-center relative'>
-          <div className='flex items-center gap-3 cursor-pointer'>
-             <div className='bg-black text-white p-2 rounded-lg'>
+     className='bg-[#EAEDEC] flex justify-center px-4 pt-6'>
+      <div className='w-full max-w-6xl bg-white rounded-[24px] shadow-sm border border-[#171512]/10 px-8 py-4 flex justify-between items-center relative'>
+          <div className='flex items-center gap-3 cursor-pointer' onClick={()=>navigate("/")}>
+             <div className='bg-[#171512] text-[#D98C2B] p-2 rounded-lg'>
                 <BsRobot size={18}/>
              </div>
-             <h1 className='font-semibold hidden md:block text-lg'>VERBA_HIRE</h1>
+             <h1 className='font-display font-medium hidden md:block text-lg tracking-tight'>VERBA_HIRE</h1>
           </div>
           <div className='flex items-center gap-6 relative'>
              <div className='relative'>
@@ -54,14 +55,14 @@ const Navbar = () => {
                     setShowCreditPopup(!showCreditPopup)
                     setShowUserPopup(false)
                 }}
-                 className='flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full text-md hover:bg-gray-200 transition'>
-                   <BsCoin size={20}/>
+                 className='flex items-center gap-2 bg-[#EAEDEC] px-4 py-2 rounded-full text-sm font-mono hover:bg-[#171512]/10 transition'>
+                   <BsCoin size={16} className='text-[#D98C2B]'/>
                    {userData?.credits||0}
                 </button>
                 {showCreditPopup && (
-                    <div className='absolute right-[-50px] mt-3 w-64 bg-white shadwo-x1 border border-gray-200 rounded p-5 z-50'>
-                      <p className='text-sm text-gray-600 mb-4'>Need More Credits to Continue Interview ?</p>
-                      <button onClick={()=>navigate("/pricing")} className='w-full bg-black text-white py-2 rounded-lg text-sm'>
+                    <div className='absolute right-[-50px] mt-3 w-64 bg-white shadow-xl border border-[#171512]/10 rounded-2xl p-5 z-50'>
+                      <p className='text-sm text-[#6B6560] mb-4'>Need more credits to continue the interview?</p>
+                      <button onClick={()=>navigate("/pricing")} className='w-full bg-[#171512] text-[#F6F5F2] py-2 rounded-lg text-sm font-medium hover:opacity-90 transition'>
                         Get Credits
                       </button>
                     </div>
@@ -77,16 +78,16 @@ const Navbar = () => {
                     setShowUserPopup(!showUserPopup)
                     setShowCreditPopup(false)
                  }} 
-                className='w-9 h-9 bg-black text-white rounded-full flex items-center justify-center font-semibold'>
+                className='w-9 h-9 bg-[#171512] text-[#D98C2B] rounded-full flex items-center justify-center font-medium font-mono'>
                    {userData?.name?.slice(0, 1)?.toUpperCase() || <FaUserAstronaut size={16} />}
                 </button>
                 {showUserPopup && (
-                    <div className='absolute right-0 mt-3 w-48 bg-white shadow-xl border border-gray-200 rounded-xl p-4 z-50'>
-                       <p className='text-md text-blue-500 font-medium mb-1'>{userData?.name}</p>
+                    <div className='absolute right-0 mt-3 w-48 bg-white shadow-xl border border-[#171512]/10 rounded-2xl p-4 z-50'>
+                       <p className='text-md text-[#D98C2B] font-medium mb-1 font-display'>{userData?.name}</p>
 
                        <button
                          
-                         className='w-full text-left text-sm py-2 hover:text-black text-gray-600'>
+                         className='w-full text-left text-sm py-2 hover:text-[#171512] text-[#6B6560] transition'>
                           Interview History
                        </button>
                        <button 
@@ -99,9 +100,10 @@ const Navbar = () => {
                 )}
              </div>
           </div>
-      </motion.div>
+      </div>
       {showAuth && <AuthModel onClose={()=>setShowAuth(false)}/>}
-    </div>
+         
+    </motion.div>
   )
 }
 
