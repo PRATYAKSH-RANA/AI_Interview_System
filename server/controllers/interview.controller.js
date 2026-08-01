@@ -32,8 +32,8 @@ export const analyzeResume = async (req, res) => {
         const messages = [
             {
                 role: "system",
-                content: `Extract Structure data from resume.
-Return strictly JSON:
+                content: `Extract Structured data from resume.
+Return strictly JSON format without markdown ticks, code blocks, or extra commentary:
 {
     "role": "string",
     "experience": "string",
@@ -48,7 +48,15 @@ Return strictly JSON:
         ];
                 
         const aiResponse = await askAI(messages)
-        const parsed = JSON.parse(aiResponse)
+        
+        // Clean markdown code blocks if the AI model wraps the output anyway
+        const cleanedResponse = aiResponse
+            .replace(/^```json\s*/i, "")
+            .replace(/^```\s*/, "")
+            .replace(/\s*```$/, "")
+            .trim();
+
+        const parsed = JSON.parse(cleanedResponse)
         
         if (file && fs.existsSync(file)) {
             fs.unlinkSync(file)
