@@ -2,8 +2,8 @@
 import fs from 'fs'
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs'
 import { askAI } from '../services/openRouter.js'
-import { User } from '../models/user.model.js'
-import Interview from '../models/interview.Model.js'
+import User from '../model/user.Model.js'
+import Interview from '../model/interview.Model.js'
 
 export const analyzeResume = async (req, res) => {
     let file = null;
@@ -196,8 +196,38 @@ export const generateQuestions = async (req, res) => {
     }
 }
 
-export const submitAnswers = async (req,res)=>{
+export const submitAnswer= async (req,res) => {
     try{
+      const{interviewId,questionIndex,answer,timeTaken}=req.body
+
+      const interview=await Interview.findById(interviewId)
+      const question=interview.questions[questionIndex]
+      
+      //if no answer provided
+      if(!answer){
+        question.score=0;
+        question.feedback="You did not submit the answer";
+        question.answer=" ";
+
+        await interview.save();
+        return res.json({
+            feedback:question.feedback,
+        })
+      }
+
+      //if time exceeds
+      if(timeTaken>question.timeLimit){
+        question.score=0;
+        question.feedback="Time limit exceeded";
+        question.answer=answer;
+
+        await interview.save()
+        return res.json({
+            feedback:question.feedback,
+        })
+      }
     }catch(error){
+
     }
 }
+
