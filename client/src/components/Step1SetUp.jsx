@@ -76,6 +76,8 @@ function Step1SetUp({ onStart }) {
         }
     }
 
+    
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
