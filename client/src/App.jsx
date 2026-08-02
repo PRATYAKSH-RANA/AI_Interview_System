@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Auth from './pages/Auth.jsx'
 import InterviewPage from './pages/InterviewPage.jsx'
+import Pricing from './pages/Pricing.jsx'
 import axios from 'axios'
 import { setUserData } from './redux/userSlice'
 import { useDispatch } from 'react-redux'
@@ -31,6 +32,7 @@ function App() {
      <Route path="/" element={<Home />} />
      <Route path="/auth" element={<Auth />} />
      <Route path="/interview" element={<InterviewPage />} />
+      <Route path="/Pricing" element={<Pricing />} />
    </Routes>
   )
 }
