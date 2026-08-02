@@ -6,6 +6,7 @@ import cors from "cors";
 import authRouter from "./routes/auth.route.js";
 import UserRouter from "./routes/user.route.js";
 import InterviewRouter from "./routes/interview.route.js";
+import paymentRouter from "./routes/payment.route.js";
 
 dotenv.config();
 const app = express();
@@ -19,9 +20,11 @@ app.use(cookieParser());
 app.use("/api/auth",authRouter);
 app.use("/api/user",UserRouter)
 app.use("/api/interview",InterviewRouter)
+app.use("/api/payment",paymentRouter)
 
-const PORT=process.env.PORT;
+const PORT = process.env.PORT || 8000; // Fallback to 8000 if not specified in .env
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+  console.log(`Server is running on port ${PORT}`);
   connectDB();
 });
